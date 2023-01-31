@@ -5,6 +5,7 @@ const logger = require("morgan");
 
 const userRouter = require("./routes/user");
 const productRouter = require("./routes/product");
+const pictureRouter = require("./routes/picture");
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/users", userRouter);
 app.use("/products", productRouter);
+app.use("/pictures", pictureRouter);
 
 module.exports = app;
