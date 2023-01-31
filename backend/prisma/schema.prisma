@@ -9,3 +9,29 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id        Int    @id @default(autoincrement())
+  email     String @unique
+  password  String @db.VarChar(255)
+  lastname  String @db.VarChar(255)
+  firstname String @db.VarChar(255)
+  alias     String @unique @db.VarChar(24)
+}
+
+model Product {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique @db.VarChar(255)
+  description String    @db.Text
+  price       Int       @db.Int
+  addedToCart Int       @default(0) @db.Int
+  Picture     Picture[]
+}
+
+model Picture {
+  id        Int     @id @default(autoincrement())
+  name      String  @db.VarChar(255)
+  url       String  @db.VarChar(255)
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+}
