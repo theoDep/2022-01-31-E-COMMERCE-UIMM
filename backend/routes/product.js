@@ -29,13 +29,14 @@ router.post("/", async (req, res) => {
   if (!req.body) res.status(400).json({ message: "Content missing" });
 
   const { name, description, price, pictures } = req.body;
+  price = parseInt(price);
 
   try {
     const product = await prisma.product.create({
       data: {
         name: name,
         description: description,
-        price: 999,
+        price: price,
         Picture: {
           createMany: {
             data: pictures,
@@ -56,6 +57,7 @@ router.put("/:id", async (req, res) => {
   id = parseInt(id);
 
   const { name, description, price } = req.body;
+  price = parseInt(price);
 
   try {
     const product = await prisma.product.update({
