@@ -28,7 +28,9 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   if (!req.body) res.status(400).json({ message: "Content missing" });
 
-  const { name, description, price, pictures } = req.body;
+  const { name, description, pictures } = req.body;
+  let { price } = req.body;
+  price = parseInt(price);
 
   try {
     const product = await prisma.product.create({
@@ -55,7 +57,9 @@ router.put("/:id", async (req, res) => {
   let { id } = req.params;
   id = parseInt(id);
 
-  const { name, description, price } = req.body;
+  const { name, description } = req.body;
+  let { price } = req.body;
+  price = parseInt(price);
 
   try {
     const product = await prisma.product.update({
