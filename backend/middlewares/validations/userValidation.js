@@ -8,7 +8,7 @@ const userValidation = (req, res, next) => {
     const presence = forCreation ? "required" : "optional";
 
     const schema = Joi.object({
-      email: Joi.string().email().required(),
+      email: Joi.string().email().required().presence(presence),
       password: Joi.string()
         .pattern(
           new RegExp(
