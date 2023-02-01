@@ -6,7 +6,6 @@ const userValidation = (req, res, next) => {
 
   const validationErrors = (data, forCreation) => {
     const presence = forCreation ? "required" : "optional";
-    console.log(presence);
 
     const schema = Joi.object({
       email: Joi.string().email().required(),
