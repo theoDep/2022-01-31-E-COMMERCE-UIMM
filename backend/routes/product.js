@@ -65,9 +65,9 @@ router.put("/:id", async (req, res) => {
     const product = await prisma.product.update({
       where: { id },
       data: {
-        name: name,
-        description: description,
-        price: price,
+        name: name !== undefined ? name : undefined,
+        description: description !== undefined ? description : undefined,
+        price: price !== undefined ? price : undefined,
       },
     });
 

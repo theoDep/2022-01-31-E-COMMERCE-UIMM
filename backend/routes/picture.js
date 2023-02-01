@@ -47,13 +47,14 @@ router.put("/:id", async (req, res) => {
   let { id } = req.params;
   id = parseInt(id);
 
-  const { name } = req.body;
+  const { name, url } = req.body;
 
   try {
     const picture = await prisma.picture.update({
       where: { id },
       data: {
-        name: name,
+        name: name !== undefined ? name : undefined,
+        url: url !== undefined ? url : undefined,
       },
     });
 

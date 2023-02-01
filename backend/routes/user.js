@@ -72,8 +72,8 @@ router.put("/:id", async (req, res) => {
     const user = await prisma.user.update({
       where: { id },
       data: {
-        alias: alias,
-        email: email,
+        alias: alias !== undefined ? alias : undefined,
+        email: email !== undefined ? email : undefined,
       },
     });
 
