@@ -8,6 +8,7 @@ const productRouter = require("./routes/product");
 const pictureRouter = require("./routes/picture");
 
 const userValidation = require("./middlewares/validations/userValidation");
+const productValidation = require("./middlewares/validations/productValidation");
 
 const app = express();
 
@@ -18,7 +19,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/users", userValidation, userRouter);
-app.use("/products", productRouter);
+app.use("/products", productValidation, productRouter);
 app.use("/pictures", pictureRouter);
 
 module.exports = app;
