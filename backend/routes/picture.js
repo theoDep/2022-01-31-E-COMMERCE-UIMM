@@ -25,7 +25,9 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   if (!req.body) res.status(400).json({ message: "Content missing" });
 
-  const { name, url, productId } = req.body;
+  const { name, url } = req.body;
+  let { productId } = req.body;
+  productId = parseInt(productId);
 
   try {
     const picture = await prisma.picture.create({
