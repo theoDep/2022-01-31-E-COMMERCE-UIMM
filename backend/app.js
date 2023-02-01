@@ -9,6 +9,7 @@ const pictureRouter = require("./routes/picture");
 
 const userValidation = require("./middlewares/validations/userValidation");
 const productValidation = require("./middlewares/validations/productValidation");
+const pictureValidation = require("./middlewares/validations/pictureValidation");
 
 const app = express();
 
@@ -20,6 +21,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/users", userValidation, userRouter);
 app.use("/products", productValidation, productRouter);
-app.use("/pictures", pictureRouter);
+app.use("/pictures", pictureValidation, pictureRouter);
 
 module.exports = app;
