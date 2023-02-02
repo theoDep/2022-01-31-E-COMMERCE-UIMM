@@ -2,7 +2,6 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const passport = require("./config/passport");
 
 const userRouter = require("./routes/user");
 const productRouter = require("./routes/product");
@@ -24,10 +23,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/users", userValidation, userRouter);
 app.use("/products", productValidation, productRouter);
 app.use("/pictures", pictureValidation, pictureRouter);
-app.use(
-  "/auth",
-  passport.authenticate("local", { session: false }),
-  authRouter
-);
+app.use("/auth", authRouter);
 
 module.exports = app;
