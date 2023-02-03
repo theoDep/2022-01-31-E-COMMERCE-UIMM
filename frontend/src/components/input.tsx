@@ -1,4 +1,6 @@
-export default ({ label }) => {
+type InputProps = { label: string };
+
+export default ({ label }: InputProps) => {
   return (
     <div className="form-control w-full max-w-xs px-5">
       <label className="label">
