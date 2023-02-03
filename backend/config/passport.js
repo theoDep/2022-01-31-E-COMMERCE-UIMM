@@ -3,12 +3,14 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const JWTStrategy = require("passport-jwt").Strategy;
 const { PrismaClient } = require("@prisma/client");
+const { passwordVerify } = require("../middlewares/password");
 const { JWT_SECRET } = require("dotenv").config().parsed;
 
 const prisma = new PrismaClient();
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
+    console.log("Entered passport.use");
     const user = await prisma.user.findFirst({
       where: {
         OR: [{ email: username }, { alias: username }],
@@ -18,12 +20,14 @@ passport.use(
     if (!user) {
       return done(null, false, { message: "Incorrect username." });
     }
-    if (user.password !== password) {
+    if (!(await passwordVerify(user.password, password))) {
       return done(null, false, { message: "Incorrect password." });
     }
     const { password: _, ...userWithoutPassword } = user;
 
-    return done(null, userWithoutPassword);
+    return done(null, userWithoutPassword, {
+      message: "Logged In Successfully",
+    });
   })
 );
 

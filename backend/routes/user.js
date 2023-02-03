@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { PrismaClient } = require("@prisma/client");
+const { passwordHash } = require("../middlewares/password");
 
 const prisma = new PrismaClient();
 
@@ -39,7 +40,7 @@ router.get("/:id", async (req, res) => {
   res.status(200).json(user);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", passwordHash, async (req, res) => {
   if (!req.body) res.status(400).json({ message: "Content missing" });
 
   const { email, password, lastname, firstname, alias } = req.body;
@@ -56,9 +57,9 @@ router.post("/", async (req, res) => {
     });
 
     res.status(201).json(user);
-  } catch (e) {
-    console.log(e);
-    res.status(400).send(e.message);
+  } catch (error) {
+    console.warn(error);
+    res.status(400).json({ message: "User creation failed" });
   }
 });
 
