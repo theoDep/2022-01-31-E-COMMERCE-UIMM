@@ -8,9 +8,9 @@ export default () => {
   return (
     <>
       <Navbar />
-      <HorizonDivider />
+      <HorizonDivider content="" />
       <Searchbar />
-      <HorizonDivider />
+      <HorizonDivider content="" />
       <Outlet />
       <Footer />
     </>

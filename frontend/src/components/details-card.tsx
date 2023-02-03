@@ -1,4 +1,6 @@
-export default ({ img, price, description }) => {
+type DetailsCardProps = { img: string; price: number; description: string };
+
+export default ({ img, price, description }: DetailsCardProps) => {
   return (
     <div className="container flex flex-col items-center">
       <figure className="">

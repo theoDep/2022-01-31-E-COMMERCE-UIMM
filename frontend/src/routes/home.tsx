@@ -7,9 +7,9 @@ export default () => {
   return (
     <>
       <Carousel />
-      <HorizonDivider />
+      <HorizonDivider content="" />
       <ContentBox content="Nos meilleures ventes" />
-      <HorizonDivider />
+      <HorizonDivider content="" />
       <Card />
       <Card />
     </>

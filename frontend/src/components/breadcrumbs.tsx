@@ -1,4 +1,6 @@
-export default ({ currentPath }) => {
+type Breadcrumbsprops = { currentPath: string[] };
+
+export default ({ currentPath }: Breadcrumbsprops) => {
   return (
     <div className="text-sm breadcrumbs ml-5">
       <ul>
