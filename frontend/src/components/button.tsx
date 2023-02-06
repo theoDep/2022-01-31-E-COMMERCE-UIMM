@@ -1,5 +1,12 @@
-type ButtonProps = { text: string };
+type ButtonProps = {
+  text: string;
+  type: "button" | "submit" | "reset" | undefined;
+};
 
-export default ({ text }: ButtonProps) => {
-  return <button className="btn w-full max-w-[16rem] m-5">{text}</button>;
+export default ({ text, type }: ButtonProps) => {
+  return (
+    <button className="btn w-full max-w-[16rem] m-5" type={type}>
+      {text}
+    </button>
+  );
 };

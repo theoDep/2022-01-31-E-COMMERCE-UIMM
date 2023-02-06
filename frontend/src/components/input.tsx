@@ -1,6 +1,11 @@
-type InputProps = { label: string };
+import { UseFormRegister, FieldValues } from "react-hook-form";
 
-export default ({ label }: InputProps) => {
+type InputProps = {
+  label: string;
+  register: UseFormRegister<FieldValues>;
+};
+
+export default ({ label, register }: InputProps) => {
   return (
     <div className="form-control w-full max-w-xs px-5">
       <label className="label">
@@ -10,6 +15,7 @@ export default ({ label }: InputProps) => {
         type="text"
         placeholder="Type here"
         className="input input-bordered w-full max-w-xs"
+        {...register(label)}
       />
     </div>
   );
