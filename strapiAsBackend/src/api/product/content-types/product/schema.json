@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "product",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "minLength": 3,
+      "unique": true
+    },
+    "short_description": {
+      "type": "text",
+      "required": true,
+      "maxLength": 128,
+      "unique": false
+    },
+    "description": {
+      "type": "richtext",
+      "required": false,
+      "default": "extremely essentially probably begin nicely Sheik right totally Zelda begin Hyrule Epona precisely basically surely simply entirely nicely Ganon Impa frankly strongly seriously particularly essentially just Talon stuff heavily specifically Farore Zora highly approximately actually Boomerang easily Darunia ok Dampé exactly maybe whenever hardly Impa try ultimately fully like practically  stuff certainly entirely ultimately Bombchu approximately widely totally okay especially Boomerang maybe probably easily fully Bombchu Hyrule primarily Tingle truly slightly real things strongly just surely possibly particularly Majora whatever Impa okay Master Sword much Tingle actually totally might highly Master Sword frankly just Deku typically mostly practically Dampé Goron Farore  virtually Farore essentially fully Master Sword typically probably generally Majora easily Boomerang particularly Master Sword necessarily actual mostly Boomerang strongly most slightly completely real widely Zelda Zora slightly strongly too just practically probably possibly literally specifically Talon mostly fairly significantly Impa completely Talon frequently ultimately Zelda surely surely whoever literally Master Sword fairly"
+    },
+    "price": {
+      "type": "integer",
+      "required": true,
+      "min": 0
+    },
+    "added_to_basket": {
+      "type": "integer",
+      "min": 0,
+      "default": 0
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "products"
+    }
+  }
+}

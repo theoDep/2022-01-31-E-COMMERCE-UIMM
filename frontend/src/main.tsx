@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/root";
 import Home from "./routes/home";
 import Details from "./routes/details";
+import Signup from "./routes/signup";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -21,9 +22,15 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+const root = ReactDOM.createRoot(document.getElementById("root") as Element);
+
+root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
