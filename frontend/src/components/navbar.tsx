@@ -1,8 +1,12 @@
+import { Link } from "react-router-dom";
+
 export default () => {
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl">MyEco</a>
+        <Link to="/">
+          <a className="btn btn-ghost normal-case text-xl">⛫ Hylian Shop</a>
+        </Link>
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end">
@@ -41,7 +45,7 @@ export default () => {
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src="https://i.pravatar.cc/300" />
+              <img src="https://avatarfiles.alphacoders.com/598/thumb-59816.jpg" />
             </div>
           </label>
           <ul
