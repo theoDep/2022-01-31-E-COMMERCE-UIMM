@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 type Breadcrumbsprops = { currentPath: string[] };
 
 export default ({ currentPath }: Breadcrumbsprops) => {
@@ -5,10 +7,18 @@ export default ({ currentPath }: Breadcrumbsprops) => {
     <div className="text-sm breadcrumbs ml-5">
       <ul>
         <li>
-          <a>Home</a>
+          <Link to="/">
+            <a>Home</a>
+          </Link>
         </li>
-        {currentPath.map((el) => (
-          <li>{el}</li>
+        {currentPath.map((el, index) => (
+          <>
+            <li key={crypto.randomUUID()}>
+              <Link to={`/${currentPath.slice(0, index + 1).join("/")}`}>
+                <a>{el}</a>
+              </Link>
+            </li>
+          </>
         ))}
       </ul>
     </div>

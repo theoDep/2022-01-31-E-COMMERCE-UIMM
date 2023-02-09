@@ -48,7 +48,7 @@ export const useProductsCategory = (category: Category) => {
       setProducts(products.data);
     };
     fetchProducts();
-  }, []);
+  }, [category]);
 
   return products;
 };
@@ -66,6 +66,25 @@ export const useProductsBest = () => {
     };
     fetchProducts();
   }, []);
+
+  return products;
+};
+
+export const useProductsSearch = (search, category = "all") => {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const response = await fetch(
+        category !== "all"
+          ? `http://localhost:1337/api/products?populate=*&filters[category][name][$eqi]=${category}&filters[name][$containsi]=${search}`
+          : `http://localhost:1337/api/products?populate=*&filters[name][$containsi]=${search}`
+      );
+      const products = await response.json();
+      setProducts(products.data);
+    };
+    fetchProducts();
+  }, [search]);
 
   return products;
 };
