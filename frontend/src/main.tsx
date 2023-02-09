@@ -3,9 +3,11 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/root";
 import Home from "./routes/home";
+import Category from "./routes/category";
 import Details from "./routes/details";
 import Signup from "./routes/signup";
 import "./index.css";
+import { ProductsProvider } from "./contexts/ProductsContext";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +19,11 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "products/:id",
+        path: "products/:category",
+        element: <Category />,
+      },
+      {
+        path: "products/:category/:id",
         element: <Details />,
       },
     ],
@@ -32,6 +38,8 @@ const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ProductsProvider>
+      <RouterProvider router={router} />
+    </ProductsProvider>
   </React.StrictMode>
 );
