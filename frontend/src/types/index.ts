@@ -33,4 +33,4 @@ export type Images = {
   data: Image[];
 };
 
-export type DetailsCardProps = { product: Product };
+export type DetailsCardProps = { product: Product; onClick: Function };

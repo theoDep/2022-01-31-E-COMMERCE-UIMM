@@ -1,6 +1,6 @@
 import { DetailsCardProps } from "../types";
 
-export default ({ product }: DetailsCardProps) => {
+export default ({ product, onClick }: DetailsCardProps) => {
   const {
     id: productId,
     attributes: {
@@ -31,7 +31,7 @@ export default ({ product }: DetailsCardProps) => {
           {price} 💎
         </div>
         <div className="grid h-20 flex-grow card place-items-center">
-          <button className="btn gap-2">
+          <button className="btn gap-2" onClick={onClick}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
