@@ -5,8 +5,15 @@ import Searchbar from "../components/searchbar";
 import Footer from "../components/footer";
 import HorizonDivider from "../components/horizon-divider";
 import useProductsContext from "../hooks/useProductsContext";
+import useCart from "../hooks/useCart";
 
 export default () => {
+  const { cart } = useCart();
+  const itemsTotal = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const itemsCost = cart.reduce(
+    (acc, item) => acc + item.attributes.price * item.quantity,
+    0
+  );
   const { setProducts } = useProductsContext();
   const { category } = useParams();
   const onSubmit = async (data) => {
@@ -21,7 +28,7 @@ export default () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar itemsTotal={itemsTotal} itemsCost={itemsCost} />
       <HorizonDivider content="" />
       <Searchbar onSubmit={onSubmit} />
       <HorizonDivider content="" />

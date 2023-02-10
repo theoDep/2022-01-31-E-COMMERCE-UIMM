@@ -8,6 +8,7 @@ import useCategories from "../hooks/useCategories";
 
 export default ({ products, category = "" }) => {
   const categories = useCategories();
+
   return (
     <>
       <Carousel />

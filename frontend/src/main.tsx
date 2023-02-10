@@ -9,6 +9,7 @@ import Details from "./routes/details";
 import Signup from "./routes/signup";
 import "./index.css";
 import { ProductsProvider } from "./contexts/ProductsContext";
+import { CartProvider } from "./contexts/CartContext";
 
 const router = createBrowserRouter([
   {
@@ -43,8 +44,10 @@ const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 
 root.render(
   <React.StrictMode>
-    <ProductsProvider>
-      <RouterProvider router={router} />
-    </ProductsProvider>
+    <CartProvider>
+      <ProductsProvider>
+        <RouterProvider router={router} />
+      </ProductsProvider>
+    </CartProvider>
   </React.StrictMode>
 );
