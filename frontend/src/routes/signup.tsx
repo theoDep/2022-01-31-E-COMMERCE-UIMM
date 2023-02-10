@@ -35,11 +35,12 @@ export default () => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: joiResolver(schema) });
+  const navigate = useNavigate();
 
   const onSubmit = async (data: FormData) => {
     const { repeatPassword: _, ...user } = data;
     try {
-      await fetch("http://localhost:1337/api/auth/local/register", {
+      const res = await fetch("http://localhost:1337/api/auth/local/register", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -47,7 +48,9 @@ export default () => {
         },
         body: JSON.stringify(user),
       });
-      useNavigate("/");
+      const json = await res.json();
+      localStorage.setItem("accessToken", json.jwt);
+      navigate("/");
     } catch (error) {
       console.error(error);
     }
