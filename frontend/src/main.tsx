@@ -7,6 +7,7 @@ import Category from "./routes/category";
 import Products from "./routes/products";
 import Details from "./routes/details";
 import Signup from "./routes/signup";
+import Signin from "./routes/signin";
 import "./index.css";
 import { ProductsProvider } from "./contexts/ProductsContext";
 import { CartProvider } from "./contexts/CartContext";
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/signin",
+    element: <Signin />,
   },
 ]);
 
