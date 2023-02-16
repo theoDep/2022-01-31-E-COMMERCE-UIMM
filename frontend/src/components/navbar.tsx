@@ -1,7 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default ({ itemsTotal, itemsCost }) => {
-  console.log(itemsTotal, itemsCost);
+  const navigate = useNavigate();
+  const handleLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("accessToken");
+    navigate("/");
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -69,7 +75,7 @@ export default ({ itemsTotal, itemsCost }) => {
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <button onClick={handleLogout}>Logout</button>
             </li>
           </ul>
         </div>
