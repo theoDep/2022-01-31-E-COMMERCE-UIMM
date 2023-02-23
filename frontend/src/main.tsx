@@ -3,9 +3,15 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/root";
 import Home from "./routes/home";
+import Category from "./routes/category";
+import Products from "./routes/products";
 import Details from "./routes/details";
 import Signup from "./routes/signup";
+import Signin from "./routes/signin";
 import "./index.css";
+import { ProductsProvider } from "./contexts/ProductsContext";
+import { CartProvider } from "./contexts/CartContext";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +23,15 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "products/:id",
+        path: "products",
+        element: <Products />,
+      },
+      {
+        path: "products/:category",
+        element: <Category />,
+      },
+      {
+        path: "products/:category/:id",
         element: <Details />,
       },
     ],
@@ -26,12 +40,22 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
+  {
+    path: "/signin",
+    element: <Signin />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <CartProvider>
+        <ProductsProvider>
+          <RouterProvider router={router} />
+        </ProductsProvider>
+      </CartProvider>
+    </AuthProvider>
   </React.StrictMode>
 );
