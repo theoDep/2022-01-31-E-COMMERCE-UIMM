@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import useCart from "../hooks/useCart";
 
-export default ({ itemsTotal, itemsCost }) => {
+export default ({ itemsTotal, itemsCost, items }) => {
   const navigate = useNavigate();
   const { logout, user } = useAuth();
+  const { addToCart, decreaseQuantity } = useCart();
   const handleLogout = async (e) => {
     e.preventDefault();
     logout();
@@ -52,6 +54,26 @@ export default ({ itemsTotal, itemsCost }) => {
               <span className="font-bold text-lg">
                 {itemsTotal ? itemsTotal : 0} Items
               </span>
+              {items.map((item) => (
+                <>
+                  <div className="flex justify-between">
+                    <span>
+                      {item.attributes.name} x{item.quantity}: {item.subtotal}
+                    </span>
+                    <span>
+                      <button
+                        type="button"
+                        onClick={() => decreaseQuantity(item)}
+                      >
+                        -
+                      </button>{" "}
+                      <button type="button" onClick={() => addToCart(item)}>
+                        +
+                      </button>
+                    </span>
+                  </div>
+                </>
+              ))}
               <span className="text-info">
                 Subtotal: {itemsCost ? itemsCost : 0} 💎
               </span>
