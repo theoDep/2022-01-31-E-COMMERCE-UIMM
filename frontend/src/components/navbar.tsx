@@ -1,7 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 export default ({ itemsTotal, itemsCost }) => {
-  console.log(itemsTotal, itemsCost);
+  const navigate = useNavigate();
+  const { logout, user } = useAuth();
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    logout();
+    navigate("/");
+  };
+  const handleLogin = (e) => {
+    e.preventDefault();
+    navigate("/signin");
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="flex-1">
@@ -60,16 +72,11 @@ export default ({ itemsTotal, itemsCost }) => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
+              {user ? (
+                <button onClick={handleLogout}>Logout</button>
+              ) : (
+                <button onClick={handleLogin}>Login</button>
+              )}
             </li>
           </ul>
         </div>
