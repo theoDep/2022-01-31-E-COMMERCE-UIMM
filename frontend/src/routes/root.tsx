@@ -14,6 +14,7 @@ export default () => {
     (acc, item) => acc + item.attributes.price * item.quantity,
     0
   );
+
   const { setProducts } = useProductsContext();
   const { category } = useParams();
   const onSubmit = async (data) => {
@@ -28,7 +29,7 @@ export default () => {
 
   return (
     <>
-      <Navbar itemsTotal={itemsTotal} itemsCost={itemsCost} />
+      <Navbar itemsTotal={itemsTotal} itemsCost={itemsCost} items={cart} />
       <HorizonDivider content="" />
       <Searchbar onSubmit={onSubmit} />
       <HorizonDivider content="" />
