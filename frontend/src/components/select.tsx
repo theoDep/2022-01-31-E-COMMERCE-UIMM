@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default ({ options }) => {
+  const { category } = useParams();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => navigate(`/products/${data.category}`);
@@ -10,11 +11,15 @@ export default ({ options }) => {
       <form className="form-control" onSubmit={handleSubmit(onSubmit)}>
         <div className="input-group">
           <select className="select select-bordered" {...register("category")}>
-            <option disabled selected value={""}>
+            <option selected={!category ? true : false} value={""}>
               Pick category
             </option>
             {options.map((option) => (
-              <option key={crypto.randomUUID()} value={option.attributes.name}>
+              <option
+                selected={category === option.attributes.name ? true : false}
+                key={crypto.randomUUID()}
+                value={option.attributes.name}
+              >
                 {option.attributes.name}
               </option>
             ))}

@@ -11,6 +11,7 @@ import Signin from "./routes/signin";
 import "./index.css";
 import { ProductsProvider } from "./contexts/ProductsContext";
 import { CartProvider } from "./contexts/CartContext";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -49,10 +50,12 @@ const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 
 root.render(
   <React.StrictMode>
-    <CartProvider>
-      <ProductsProvider>
-        <RouterProvider router={router} />
-      </ProductsProvider>
-    </CartProvider>
+    <AuthProvider>
+      <CartProvider>
+        <ProductsProvider>
+          <RouterProvider router={router} />
+        </ProductsProvider>
+      </CartProvider>
+    </AuthProvider>
   </React.StrictMode>
 );

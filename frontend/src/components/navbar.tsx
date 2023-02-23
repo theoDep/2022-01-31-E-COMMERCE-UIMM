@@ -1,11 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 export default ({ itemsTotal, itemsCost }) => {
   const navigate = useNavigate();
-  const handleLogout = (e) => {
+  const { logout, user } = useAuth();
+  const handleLogout = async (e) => {
     e.preventDefault();
-    localStorage.removeItem("accessToken");
+    logout();
     navigate("/");
+  };
+  const handleLogin = (e) => {
+    e.preventDefault();
+    navigate("/signin");
   };
 
   return (
@@ -66,16 +72,11 @@ export default ({ itemsTotal, itemsCost }) => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <button onClick={handleLogout}>Logout</button>
+              {user ? (
+                <button onClick={handleLogout}>Logout</button>
+              ) : (
+                <button onClick={handleLogin}>Login</button>
+              )}
             </li>
           </ul>
         </div>
